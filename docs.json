@@ -50,7 +50,7 @@
       "anchors": [
         {
           "anchor": "Home",
-          "href": "https://docs.corpi1.uk/home",
+          "href": "/home",
           "icon": "house"
         },
         {
@@ -60,7 +60,7 @@
         },
         {
           "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
+          "href": "https://corpi1.uk/blog",
           "icon": "newspaper"
         }
       ]
