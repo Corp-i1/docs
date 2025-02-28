@@ -1,0 +1,74 @@
+---
+title: Getting Started
+---
+
+## Main Window
+
+The Main Window is the central hub for the application. It is where Users will spend most of their time.
+
+### Key Components
+
+- **Title Bar**: 
+- **Master Head Section**: Includes buttons for "Go", "Pause", and "Stop", and text blocks for displaying the current cue and track.
+- **Toolbar**: Contains buttons for refreshing, creating a new cue, and deleting a cue.
+- **Cue List**:
+- **Inspector**: A section for editing details of the selected cue, such as name, number, duration, pre-wait, post-wait, auto-follow, file name, target file, and notes.
+- **Footer**: Displays a link to the GitHub repository and buttons for accessing settings and toggling edit mode.
+
+### Event Handlers
+
+- **CloseMenuItem_Click**: Closes the window.
+- **SettingsMenuItem_Click**: Opens the settings window.
+- **SaveMenuItem_Click**: Saves the current state.
+- **OpenMenuItem_Click**: Opens a file.
+- **ExportMenuItem_Click**: Exports data.
+- **ImportMenuItem_Click**: Imports data.
+- **GoButton_Click**: Starts the main action.
+- **PauseButton_Click**: Pauses the main action.
+- **StopButton_Click**: Stops the main action.
+- **RefreshButton_Click**: Refreshes the data.
+- **CreateNewCue_Click**: Creates a new cue.
+- **DeleteCue_Click**: Deletes the selected cue.
+- **CueListView_SelectionChanged**: Handles selection changes in the cue list.
+- **Duration_GotFocus**: Handles focus events for the duration text box.
+- **Duration_LostFocus**: Handles lost focus events for the duration text box.
+- **SelectTargetFile_Click**: Opens a dialog to select a target file.
+- **EditModeToggle_Click**: Toggles edit mode.
+
+## Settings Window
+
+The Settings Window allows users to configure various settings.
+
+### Key Components
+
+- **Theme Selection**: A combo box for selecting the application theme (Dark, Light, Rainbow).
+- **Language Selection**: A combo box for selecting the application language (en-UK, wanna translate it?).
+- **Save Button**: A button to save the selected settings.
+
+### Event Handlers
+
+- **SaveButton_Click**: Saves the selected settings.
+
+## Startup Window
+
+The Startup Window provides options for creating a new playlist, opening an existing playlist, importing a playlist, and accessing settings.
+
+### Key Components
+
+- **Title Bar**: Contains the Win Labs logo (with a easter egg), a menu with basic option of: "Close" and More to come.
+- **Buttons**: 
+	- Creating a new playlist
+	- Opening an existing playlist
+	- Importing a playlist
+	- Accessing settings.
+
+### Event Handlers
+
+- **Window_MouseDown**: Handles mouse down events for the window.
+- **TitleBarIcon_Click**: Handles click events for the title bar icon.
+- **CloseMenuItem_Click**: Closes the window.
+- **CloseButton_Click**: Closes the window.
+- **CreateNewPlaylist_Click**: Creates a new playlist.
+- **OpenExistingPlaylist_Click**: Opens an existing playlist.
+- **ImportPlaylist_Click**: Imports an existing playlist.
+- **Settings_Click**: Opens the settings window.

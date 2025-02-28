@@ -1,54 +1,46 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "Documentation",
   "colors": {
     "primary": "#16A34A",
     "light": "#07C983",
     "dark": "#15803D"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/Favicon.png",
   "navigation": {
     "tabs": [
       {
         "tab": "Guides",
         "groups": [
           {
-            "group": "Get Started",
+            "group": "Main Pages",
             "pages": [
-              "introduction",
-              "quickstart",
-              "development"
-            ]
-          },
-          {
-            "group": "Essentials",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation",
-              "essentials/reusable-snippets"
+              "Home",
+              "Contact",
+              "Projects"
             ]
           }
         ]
       },
       {
-        "tab": "API Reference",
+        "tab": "Win-Labs",
         "groups": [
           {
-            "group": "API Documentation",
+            "group": "Win-Labs Documentation",
             "pages": [
-              "api-reference/introduction"
+              "Win-Labs/introduction"
+            ]
+          },{
+            "group": "Installation",
+            "pages": [
+              "Win-Labs/Installation/Installation"
             ]
           },
           {
-            "group": "Endpoint Examples",
+            "group": "Usage",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete"
+              "Win-Labs/Usage/Getting-Started"
             ]
           }
         ]
@@ -57,14 +49,14 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
+          "anchor": "Home",
+          "href": "https://docs.corpi1.uk/home",
+          "icon": "house"
         },
         {
           "anchor": "Community",
-          "href": "https://mintlify.com/community",
-          "icon": "slack"
+          "href": "https://corpi1.uk/community", 
+          "icon": "discord"
         },
         {
           "anchor": "Blog",
@@ -75,27 +67,28 @@
     }
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/logo.png",
+    "dark": "/logo/logo.png"
   },
   "navbar": {
     "links": [
       {
         "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "href": "mailto:corpi1.business@gmail.com"
       }
     ],
-    "primary": {
+  "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "label": "Corpi1.uk",
+      "href": "https://Corpi1.uk"
     }
   },
   "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
-    }
+    "socials":
+      {
+      "x": "https://x.com/",
+      "github": "https://github.com/corp-i1",
+      "linkedin": "https://linkedin.com/"
+      }
   }
 }
