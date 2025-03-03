@@ -4,9 +4,9 @@ This site is hosted at [Corpi1.uk](https://corpi1.uk) and provides comprehensive
 
 ## Sections
 
-- [Home](/Home)
-- [Contact](/Contact)
-- [Projects](/Projects)
+- [Home](https://corpi1.uk/Home)
+- [Contact](https://corpi1.uk/Contact)
+- [Projects](https://corpi1.uk/Projects)
 
 ## Getting Started
 
