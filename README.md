@@ -12,6 +12,10 @@ This site is hosted at [Corpi1.uk](https://corpi1.uk) and provides comprehensive
 
 To get started follow the instructions in the documentation of the [projects](/Projects) you like the look of.
 
-## License
+## License  
+This project is licensed under the **MPL-2.0 with a No Resale Clause**.  
 
-This project is licensed under the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0) License. See the [LICENSE](LICENSE.md) file for details.
+You are free to use, modify, and distribute the software. **Businesses and individuals can use it**, including in commercial activities. However, **you may not sell, repackage, or monetize the software itself**.  
+
+See the [LICENSE](LICENSE.md) file for full terms.  
+
