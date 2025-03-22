@@ -3,94 +3,45 @@ title: "ToDo"
 ---                                                                                   
 
 <style>
-  .kanban-board {
-    display: flex;
-    justify-content: space-between;
-  }
-  .kanban-column {
-    width: 30%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f4f4f4;
-  }
-  .kanban-column h2 {
-    text-align: center;
-  }
-  .kanban-item {
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-  }
+    .kanban-board {
+        display: flex;
+        gap: 10px;
+    }
+    .column {
+        border: 1px solid #ccc;
+        padding: 10px;
+        width: 200px;
+    }
+    .cards {
+        min-height: 100px;
+    }
+    .card {
+        background: #f0f0f0;
+        margin: 5px 0;
+        padding: 10px;
+        cursor: move;
+    }
 </style>
 
 <div class="kanban-board">
-  <div class="kanban-column" id="short-term">
-    <h2>Short Term</h2>
-    <div class="kanban-item">Add ability for custom themes</div>
-    <div class="kanban-item">Provide template for user made themes</div>
-    <div class="kanban-item">Add an import button for themes in settings</div>
-    <div class="kanban-item">Host a place to share themes</div>
-    <div class="kanban-item">Make guide for manual installation</div>
-    <div class="kanban-item">Make Tabs for the inspector window</div>
-  </div>
-  <div class="kanban-column" id="long-term">
-    <h2>Long Term</h2>
-    <div class="kanban-item">Database to store playlists online</div>
-    <div class="kanban-item">My own FFT package</div>
-    <div class="kanban-item">My own audio package</div>
-  </div>
-  <div class="kanban-column" id="fft-goals">
-    <h2>FFT Goals</h2>
-    <div class="kanban-item">Made in C++ for speed and performance</div>
-    <div class="kanban-item">Demo FFT Project</div>
-    <div class="kanban-item">Visualiser for spectograms</div>
-    <div class="kanban-item">Live FFT</div>
-    <div class="kanban-item">FFT from audio files</div>
-  </div>
+    <div class="column">
+        <h3>To Do</h3>
+        <div class="cards" id="todo-cards"></div>
+        <button class="add-card">Add Card</button>
+    </div>
+    <div class="column">
+        <h3>In Progress</h3>
+        <div class="cards" id="inprogress-cards"></div>
+        <button class="add-card">Add Card</button>
+    </div>
+    <div class="column">
+        <h3>Done</h3>
+        <div class="cards" id="done-cards"></div>
+        <button class="add-card">Add Card</button>
+    </div>
 </div>
 
-<script>
-  // JavaScript to handle drag and drop functionality
-  const items = document.querySelectorAll('.kanban-item');
-  const columns = document.querySelectorAll('.kanban-column');
-
-  items.forEach(item => {
-    item.draggable = true;
-    item.addEventListener('dragstart', dragStart);
-    item.addEventListener('dragend', dragEnd);
-  });
-
-  columns.forEach(column => {
-    column.addEventListener('dragover', dragOver);
-    column.addEventListener('drop', drop);
-  });
-
-  function dragStart(e) {
-    e.dataTransfer.setData('text/plain', e.target.id);
-    setTimeout(() => {
-      e.target.classList.add('hide');
-    }, 0);
-  }
-
-  function dragEnd(e) {
-    e.target.classList.remove('hide');
-  }
-
-  function dragOver(e) {
-    e.preventDefault();
-  }
-
-  function drop(e) {
-    e.preventDefault();
-    const id = e.dataTransfer.getData('text/plain');
-    const draggable = document.getElementById(id);
-    e.target.appendChild(draggable);
-  }
-</script>
-
+<script src="kanban.js"></script>
 
 Short Term:
 - Add ability for custom themes
