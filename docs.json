@@ -11,7 +11,7 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Home",
         "groups": [
           {
             "group": "Main Pages",
@@ -19,7 +19,7 @@
               "Home",
               "Contact",
               "Projects",
-              "To Do"
+              "ToDo"
             ]
           }
         ]
