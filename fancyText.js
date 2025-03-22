@@ -1,1 +1,0 @@
-console.log("%cJS script called!", "color: blue; font-size: 20px; font-weight: bold; text-shadow: 2px 2px 4px #000000;");
