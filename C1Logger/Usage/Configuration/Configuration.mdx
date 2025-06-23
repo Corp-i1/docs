@@ -1,0 +1,48 @@
+---
+title: Configuration
+icon: "Gear"
+---
+
+## `C1LogConfig` Class
+
+Configure C1Logger using the `C1LogConfig` class:
+
+```csharp
+var config = new C1LogConfig { 
+    MaxLogFiles = 10, 
+    LogDirectory = @"C:\Logs", 
+    MinLogLevel = C1Log.LogLevel.Notice, 
+    Formatter = (dt, lvl, msg) => $"[{lvl.ShortHand()}] {dt:HH:mm:ss} - {msg}" }; 
+    config.Sinks.Add(new MyCustomSink()); 
+    C1Log.InitLog(config);
+```
+
+
+### Properties
+
+- `MaxLogFiles` (`int`):  
+  The maximum number of log files to retain in the log directory. Older files beyond this limit are automatically deleted.  
+  **Default:** `10`
+
+- `LogDirectory` (`string`):  
+  The directory where log files are written. If not set, defaults to the application's base directory + `Logs`.
+
+- `MinLogLevel` (`C1Log.LogLevel`):  
+  The minimum log level to write. Only messages at or above this level are logged.  
+  **Default:** `C1Log.LogLevel.Informational`
+
+- `Formatter` (`Func<DateTime, C1Log.LogLevel, string, string>`):  
+  A delegate to customize the log message format. Receives the timestamp, log level, and message.  
+  **Default:**  
+  ```csharp
+  (timestamp, level, message) => $"{timestamp:yyyy-MM-dd HH:mm:ss.fff} [{level}] {message}"
+  ```
+
+
+- `Sinks` (`List<C1Log.ILogSink>`):  
+  A collection of custom log sinks. Each sink can process log messages independently (e.g., send to a database, cloud, or other destinations).
+
+---
+
+**Tip:**  
+You can combine all configuration options for advanced scenarios, such as custom formatting, log file management, and multi-destination logging.

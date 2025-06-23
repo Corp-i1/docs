@@ -1,0 +1,51 @@
+---
+title: Usage
+icon: "terminal"
+---
+
+## Overloads
+
+C1Logger provides several overloads for `InitLog`:
+
+```csharp
+C1Log.InitLog(); // Default settings 
+C1Log.InitLog(5); // Max 5 log files 
+C1Log.InitLog(@"C:\Logs"); // Custom log directory 
+C1Log.InitLog(C1Log.LogLevel.Warning); // Custom minimum log level 
+C1Log.InitLog(@"C:\Logs", C1Log.LogLevel.Debug); // Directory + log level 
+C1Log.InitLog(5, @"C:\Logs"); // Max files + directory 
+C1Log.InitLog(5, @"C:\Logs", C1Log.LogLevel.Notice); // Max files + directory + log level 
+C1Log.InitLog(new C1LogConfig { ... }); // Full configuration
+```
+
+---
+
+
+
+## Basic Initialization
+
+```csharp
+using C1Logger;
+C1Log.InitLog(); // Initialize with default settings 
+C1Log.Informational("Application started."); 
+C1Log.Flush(); // Ensure all logs are written
+```
+
+
+## Custom Initialization
+
+You can customize the log directory, minimum log level, and formatter:
+
+```csharp
+using C1Logger;
+C1Log.InitLog( new C1LogConfig { 
+    LogDirectory = @"C:\Logs", 
+    MinLogLevel = C1Log.LogLevel.Warning, 
+    Formatter = (dt, lvl, msg) => $"[{lvl.ShortHand()}] {dt:HH:mm:ss} - {msg}" 
+    } 
+);
+C1Log.Informational("Application started."); 
+C1Log.Error("An error occurred."); 
+C1Log.Flush();
+```
+

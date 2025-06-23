@@ -1,0 +1,153 @@
+---
+title: Custom Sinks (Filters)
+icon: "filter"
+---
+
+C1Logger supports extensibility through custom log sinks.  
+A log sink allows you to send log messages to any destination (e.g., console, file, database, cloud logging, etc.).
+
+## Implementing a Custom Sink
+
+To create your own sink, implement the `C1Log.ILogSink` interface.  
+The interface supports asynchronous logging, log level filtering, and resource cleanup.
+
+```csharp
+using System; 
+using System.Collections.Generic; 
+using System.Threading.Tasks; 
+using C1Logger;
+
+public class MyCustomSink : C1Log.ILogSink { 
+    // Set the minimum log level this sink will process public 
+    C1Log.LogLevel MinLogLevel => C1Log.LogLevel.Debug;
+    // Asynchronously handle log messages
+    public Task WriteAsync(
+        string message, 
+        C1Log.LogLevel level, 
+        IDictionary<string, object> context = null)
+        {
+            // Custom logic here (e.g., write to a database, send to an API, etc.)
+            Console.WriteLine($"[MyCustomSink][{level}] {message}");
+            return Task.CompletedTask;
+        }
+}
+```
+
+
+## Registering Your Sink
+
+Add your sink before logging:
+
+```csharp
+C1Log.AddSink(new MyCustomSink());
+```
+
+
+## Example Usage
+
+```csharp
+C1Log.AddSink(new MyCustomSink()); 
+C1Log.InitLog(); 
+C1Log.Informational("This message will be sent to your custom sink."); 
+C1Log.Flush();
+```
+
+## Filtering for Specific Log Levels in a Custom Sink
+
+By default, a custom sink in C1Logger uses the MinLogLevel property to determine which log messages it receives. However, this property only allows you to filter for all log levels at or above a certain severity (e.g., all logs that are Critical or less severe).
+
+If you want your sink to process only specific log levels (for example, only Informational and Critical), you can implement the filtering logic inside your sink’s WriteAsync method. This gives you full control over which messages are handled.
+
+You can also use this to filter for every log below or above a log level.
+
+### Example: Sink for Only Informational and Critical Logs
+
+```csharp
+public class InfoAndCriticalSink : C1Log.ILogSink
+{   // Will receive all <= Critical
+    public C1Log.LogLevel MinLogLevel => C1Log.LogLevel.Critical; 
+
+    public Task WriteAsync(
+        string message, 
+        C1Log.LogLevel level, 
+        IDictionary<string, 
+        object> context = null)
+    {
+        if (
+            level == C1Log.LogLevel.Critical 
+            || 
+            level == C1Log.LogLevel.Informational)
+        {
+            // Process only Critical and Informational
+            Console.WriteLine($"[InfoAndCriticalSink][{level}] {message}");
+        }
+        return Task.CompletedTask;
+    }
+}
+```
+
+## Sending Logs to Multiple Sinks
+
+C1Logger supports registering multiple custom sinks. When you add more than one sink using `C1Log.AddSink`, every log message will be sent to all registered sinks that match the log level filter.
+
+This is useful if you want to, for example, write logs to a file, display them in the console, and send them to a cloud logging service simultaneously.
+
+### Example: Registering Multiple Sinks
+
+```csharp
+using System; 
+using System.Collections.Generic; 
+using System.Threading.Tasks; 
+using C1Logger;
+// Example sink that writes to the console 
+public class ConsoleSink : C1Log.ILogSink { 
+    public C1Log.LogLevel MinLogLevel 
+    => C1Log.LogLevel.Debug; 
+    public Task WriteAsync(
+        string message, 
+        C1Log.LogLevel level, 
+        IDictionary<string, object> context = null) 
+        { 
+            Console.WriteLine($"[ConsoleSink][{level}] {message}"); 
+            return Task.CompletedTask; 
+        } 
+    }
+    // Example sink that writes to a file 
+    public class FileSink : C1Log.ILogSink { 
+        public C1Log.LogLevel MinLogLevel 
+        => C1Log.LogLevel.Warning; 
+        private readonly string _filePath = "warnings.log"; 
+        public Task WriteAsync(
+            string message, 
+            C1Log.LogLevel level, 
+            IDictionary<string, object> context = null) 
+            { 
+                System.IO.File.AppendAllText(
+                    _filePath, 
+                    $"[FileSink][{level}] {message}{Environment.NewLine}"
+                    ); 
+                return Task.CompletedTask; 
+            } 
+    }
+// Register both sinks 
+C1Log.AddSink(new ConsoleSink()); 
+C1Log.AddSink(new FileSink());
+C1Log.InitLog(); 
+C1Log.Informational("This will go to the console sink."); 
+C1Log.Warning("This will go to both the console and file sinks."); 
+C1Log.Flush();
+```
+
+---
+
+## Notes
+
+- The `MinLogLevel` property allows you to filter which log levels your sink will process, but it only supports filtering for all levels at or above a certain severity (e.g., all logs that are `Critical` or less severe).
+- If you want your sink to process only specific log levels (such as only `Informational` and `Critical`), implement the filtering logic inside your sink’s `WriteAsync` method.
+- The `WriteAsync` method is called asynchronously for each log message.
+- You can add multiple sinks; each will receive log messages independently if the log level matches their filter.
+- Built-in outputs (console and file) are controlled by the global logger settings and are not affected by custom sink filters.
+
+---
+
+For advanced scenarios, you can implement sinks that send logs to cloud providers, external APIs, or batch/process logs as needed.

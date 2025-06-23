@@ -45,6 +45,39 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "C1Logger",
+        "groups": [
+          {
+            "group": "C1Logger Documentation",
+            "pages": [
+              "C1Logger/Introduction"
+            ]
+          },
+          {
+            "group": "Installation",
+            "pages": [
+              "C1Logger/Log_Installation/Log_Installation"
+            ]
+          },
+          {
+            "group": "Usage",
+            "pages": [
+              "C1Logger/Usage/Usage",
+              "C1Logger/Usage/Configuration/Configuration",
+              "C1Logger/Usage/Log_Levels/Log_Levels",
+              "C1Logger/Usage/API_Reference/API_Reference",
+              "C1Logger/Usage/Custom_Sinks/Custom_Sinks"
+            ]
+          },
+          {
+            "group": "Troubleshooting",
+            "pages": [
+              "C1Logger/Troubleshooting/Troubleshooting"
+            ]
+          }
+        ]
       }
     ],
     "global": {
