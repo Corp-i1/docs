@@ -1,0 +1,51 @@
+---
+title: Log Levels
+icon: "slider"
+---
+
+C1Logger uses syslog-style log levels, each with a shorthand and a specific purpose:
+
+| Level           | Shorthand | Description                                      |
+|-----------------|-----------|--------------------------------------------------|
+| Emergency       | emerg     | System is unusable. Immediate attention required.|
+| Alert           | alert     | Action must be taken immediately.                |
+| Critical        | crit      | Critical conditions, e.g., application failure.  |
+| Error           | error     | Error conditions that need investigation.        |
+| Warning         | warn      | Potential issues or unexpected situations.       |
+| Notice          | notice    | Normal but significant events.                   |
+| Informational   | info      | General informational messages.                  |
+| Debug           | debug     | Detailed debug information for development.      |
+
+## Usage Example
+
+```csharp
+C1Log.Emergency("System is down!");
+C1Log.Alert("Immediate action required.");
+C1Log.Critical("Critical error occurred.");
+C1Log.Error("An error happened.");
+C1Log.Warning("This is a warning.");
+C1Log.Notice("Something noteworthy happened.");
+C1Log.Informational("Just so you know...");
+C1Log.Debug("Debugging details here.");
+
+// Get the shorthand for a level
+var shorthand = C1Log.LogLevel.Critical.ShortHand(); // "crit"
+```
+
+## Log Level Filtering
+
+You can control which log messages are written by setting `C1Log.MinLogLevel`.  
+Only messages at or above this level will be processed by the logger and its outputs.
+
+```csharp
+C1Log.MinLogLevel = C1Log.LogLevel.Warning; // Only Warning, Error, Critical, Alert, Emergency will be logged
+```
+
+## Custom Sink Filtering
+
+Custom sinks can further filter or process specific log levels.  
+See the [Custom Sinks](custom-sinks) section for more details.
+
+---
+
+Use the extension method `.ShortHand()` to get the shorthand for any log level.

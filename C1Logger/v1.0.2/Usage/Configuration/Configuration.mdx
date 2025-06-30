@@ -1,0 +1,67 @@
+---
+title: Configuration
+icon: "Gear"
+---
+
+## Auto-Configuration
+
+C1Logger auto-initializes when you make your first log call. Simply set properties before logging:
+
+```csharp
+using C1Logger;
+// Set configuration before first log call
+C1Log.MaxLogFiles = 10;
+C1Log.LogDirectory = @"C:\Logs";
+C1Log.MinLogLevel = C1Log.LogLevel.Notice;
+C1Log.Formatter = (dt, lvl, msg) => $"[{lvl.ShortHand()}] {dt:HH:mm:ss} - {msg}";
+
+// Add custom sinks before first log call
+C1Log.AddSink(new MyCustomSink());
+
+// Logger auto-initializes here
+C1Log.Informational("Application started.");
+```
+
+## Legacy Configuration with `C1LogConfig` (Deprecated)
+
+The `C1LogConfig` class and `InitLog` methods are deprecated but still supported:
+
+```csharp
+var config = new C1LogConfig { 
+    MaxLogFiles = 10, 
+    LogDirectory = @"C:\Logs", 
+    MinLogLevel = C1Log.LogLevel.Notice, 
+    Formatter = (dt, lvl, msg) => $"[{lvl.ShortHand()}] {dt:HH:mm:ss} - {msg}" }; 
+    config.Sinks.Add(new MyCustomSink()); 
+    C1Log.InitLog(config); // Deprecated
+```
+
+
+### Properties
+
+- `MaxLogFiles` (`int`):  
+  The maximum number of log files to retain in the log directory. Older files beyond this limit are automatically deleted.  
+  **Default:** `10`
+
+- `LogDirectory` (`string`):  
+  The directory where log files are written. If not set, defaults to the application's base directory + `Logs`.
+
+- `MinLogLevel` (`C1Log.LogLevel`):  
+  The minimum log level to write. Only messages at or above this level are logged.  
+  **Default:** `C1Log.LogLevel.Informational`
+
+- `Formatter` (`Func<DateTime, C1Log.LogLevel, string, string>`):  
+  A delegate to customize the log message format. Receives the timestamp, log level, and message.  
+  **Default:**  
+  ```csharp
+  (timestamp, level, message) => $"{timestamp:yyyy-MM-dd HH:mm:ss.fff} [{level}] {message}"
+  ```
+
+
+- `Sinks` (`List<C1Log.ILogSink>`):  
+  A collection of custom log sinks. Each sink can process log messages independently (e.g., send to a database, cloud, or other destinations).
+
+---
+
+**Tip:**  
+You can combine all configuration options for advanced scenarios, such as custom formatting, log file management, and multi-destination logging.

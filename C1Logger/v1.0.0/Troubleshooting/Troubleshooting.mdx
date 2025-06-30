@@ -4,7 +4,7 @@ icon: "wrench"
 ---
 
 - **No logs are written:**  
-  Ensure you called `C1Log.InitLog()` before logging and `C1Log.Flush()` before application exit.
+  The logger auto-initializes on the first log call. Ensure you call `C1Log.Flush()` before application exit to ensure all logs are written. If using custom configuration, set properties before the first log call.
 
 - **Logging failures:**  
   Subscribe to `C1Log.OnLoggingFailure` to handle exceptions during logging. Dont worry even if you dont logs will still be writen to Console.

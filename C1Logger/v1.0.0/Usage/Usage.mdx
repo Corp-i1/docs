@@ -1,0 +1,59 @@
+---
+title: Usage
+icon: "terminal"
+---
+
+## Auto-Initialization
+
+**C1Logger no longer requires manual initialization!** The logger automatically initializes when you make your first log call. Simply set any configuration properties before logging:
+
+```csharp
+using C1Logger;
+// Optional: Configure before first log call
+C1Log.LogDirectory = @"C:\Logs";
+C1Log.MinLogLevel = C1Log.LogLevel.Warning;
+
+C1Log.Informational("Application started."); // Auto-initializes here
+C1Log.Flush();
+```
+
+## Manual Initialization (Legacy - Deprecated)
+
+The `InitLog` methods are now **deprecated** but still supported for backward compatibility. These may be removed in a future version:
+
+```csharp
+C1Log.InitLog(); // Default settings 
+C1Log.InitLog(5); // Max 5 log files 
+C1Log.InitLog(@"C:\Logs"); // Custom log directory 
+C1Log.InitLog(C1Log.LogLevel.Warning); // Custom minimum log level 
+C1Log.InitLog(@"C:\Logs", C1Log.LogLevel.Debug); // Directory + log level 
+C1Log.InitLog(5, @"C:\Logs"); // Max files + directory 
+C1Log.InitLog(5, @"C:\Logs", C1Log.LogLevel.Notice); // Max files + directory + log level 
+C1Log.InitLog(new C1LogConfig { ... }); // Full configuration
+```
+
+---
+
+## Basic Usage
+
+```csharp
+using C1Logger;
+C1Log.Informational("Application started."); 
+C1Log.Flush(); // Ensure all logs are written
+```
+
+## Configuration Before Logging
+
+You can customize the log directory, minimum log level, and formatter **before making your first log call**:
+
+```csharp
+using C1Logger;
+C1Log.LogDirectory = @"C:\Logs";
+C1Log.MinLogLevel = C1Log.LogLevel.Warning;
+C1Log.Formatter = (dt, lvl, msg) => $"[{lvl.ShortHand()}] {dt:HH:mm:ss} - {msg}";
+
+C1Log.Informational("Application started."); 
+C1Log.Error("An error occurred."); 
+C1Log.Flush();
+```
+

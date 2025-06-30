@@ -1,0 +1,26 @@
+---
+title: Introduction
+icon: "hand"
+---
+
+C1Logger is a modern, thread-safe, and highly configurable logging library for .NET applications.  
+Designed for reliability and performance, C1Logger is ideal for desktop, server, and cloud-based solutions.
+
+**Key Features:**
+- **Thread-safe**: Safe for use in multi-threaded and high-concurrency environments.
+- **Asynchronous**: Logging is performed on a background thread for minimal application impact.
+- **File rolling**: Log files are automatically rotated by date and/or size.
+- **Customizable**: Easily extend with custom log sinks (e.g., cloud, database, or third-party services) and message formatting.
+- **Syslog-style levels**: Familiar log levels with shorthand for easy filtering and integration.
+- **Flexible integration**: Drop into any .NET project with minimal setup.
+
+**Example: Basic Usage**
+```csharp
+using C1Logger;
+// No initialization required - logger auto-initializes on first use
+C1Log.Informational("Application started."); 
+C1Log.Flush();
+```
+
+
+Whether you need simple file logging or advanced, multi-destination log routing, C1Logger provides a robust foundation for your application's logging needs.

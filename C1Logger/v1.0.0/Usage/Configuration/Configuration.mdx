@@ -3,9 +3,34 @@ title: Configuration
 icon: "Gear"
 ---
 
-## `C1LogConfig` Class
+## Auto-Configuration
 
-Configure C1Logger using the `C1LogConfig` class:
+C1Logger auto-initializes when you make your first log call. Simply set properties before logging:
+
+**Benefits of Auto-Initialization:**
+- **Simplified setup**: No need to remember to call `InitLog()`
+- **Error reduction**: Prevents common initialization mistakes
+- **Cleaner code**: Less boilerplate in your applications
+- **Thread-safe**: Initialization is automatically thread-safe
+
+```csharp
+using C1Logger;
+// Set configuration before first log call
+C1Log.MaxLogFiles = 10;
+C1Log.LogDirectory = @"C:\Logs";
+C1Log.MinLogLevel = C1Log.LogLevel.Notice;
+C1Log.Formatter = (dt, lvl, msg) => $"[{lvl.ShortHand()}] {dt:HH:mm:ss} - {msg}";
+
+// Add custom sinks before first log call
+C1Log.AddSink(new MyCustomSink());
+
+// Logger auto-initializes here
+C1Log.Informational("Application started.");
+```
+
+## Legacy Configuration with `C1LogConfig` (Deprecated)
+
+The `C1LogConfig` class and `InitLog` methods are deprecated but still supported:
 
 ```csharp
 var config = new C1LogConfig { 
@@ -14,7 +39,7 @@ var config = new C1LogConfig {
     MinLogLevel = C1Log.LogLevel.Notice, 
     Formatter = (dt, lvl, msg) => $"[{lvl.ShortHand()}] {dt:HH:mm:ss} - {msg}" }; 
     config.Sinks.Add(new MyCustomSink()); 
-    C1Log.InitLog(config);
+    C1Log.InitLog(config); // Deprecated
 ```
 
 

@@ -1,0 +1,153 @@
+---
+title: API Reference
+icon: "robot"
+---
+A breif overview of how to use the package for a more indepth look go to restrospective pages.
+
+## Static Methods
+
+### Configuration Properties
+
+Set these properties before making your first log call to configure the logger:
+
+| Property | Type | Description | Default |
+|----------|------|-------------|---------|
+| `LogDirectory` | `string` | Directory where log files are written | `{AppDirectory}\Logs` |
+| `MaxLogFiles` | `int` | Maximum number of log files to keep | `10` |
+| `MinLogLevel` | `LogLevel` | Minimum log level to write | `Informational` |
+| `MaxFileSizeBytes` | `long` | Maximum log file size before rolling | `10 MB` |
+| `OutputMode` | `LogOutputMode` | Console, File, or Both | `Both` |
+| `Formatter` | `Func<DateTime, LogLevel, string, string>` | Custom message formatter | Default format |
+
+**Example:**
+```csharp
+C1Log.LogDirectory = @"C:\Logs";
+C1Log.MinLogLevel = C1Log.LogLevel.Warning;
+C1Log.Informational("Auto-initializes here"); // Logger starts automatically
+```
+
+### `InitLog` Overloads (Deprecated)
+
+⚠️ **These methods are deprecated and may be removed in a future version. Use property configuration instead.**
+
+| Signature                                                      | Description                                         |
+|--------------------------------------------------------------- |-----------------------------------------------------|
+| `InitLog()`                                                    | Initializes with default settings.                  |
+| `InitLog(int maxLogFiles)`                                     | Sets max log files.                                 |
+| `InitLog(string logDirectory)`                                 | Sets log directory.                                 |
+| `InitLog(LogLevel minLogLevel)`                                | Sets minimum log level.                             |
+| `InitLog(string logDirectory, LogLevel minLogLevel)`           | Sets directory and log level.                       |
+| `InitLog(int maxLogFiles, string logDirectory)`                | Sets max files and directory.                       |
+| `InitLog(int maxLogFiles, string logDirectory, LogLevel minLogLevel)` | Sets max files, directory, and log level.           |
+| `InitLog(C1LogConfig config)`                                  | Full configuration using a config object.           |
+
+**Legacy Example:**
+```csharp
+C1Log.InitLog(@"C:\Logs", C1Log.LogLevel.Warning); // Deprecated
+```
+
+
+---
+
+### Logging Methods
+
+- `C1Log.Informational(string message)` — Log an informational message.
+- `C1Log.Warning(string message)` — Log a warning.
+- `C1Log.Error(string message)` — Log an error.
+- `C1Log.Debug(string message)` — Log a debug message.
+- `C1Log.Notice(string message)` — Log a notice.
+- `C1Log.Critical(string message)` — Log a critical error.
+- `C1Log.Alert(string message)` — Log an alert.
+- `C1Log.Emergency(string message)` — Log an emergency.
+- `C1Log.Exception(Exception ex)` — Log an exception (as alert).
+
+**Example:**
+```csharp 
+C1Log.Error("Something went wrong!"); 
+C1Log.Exception(new InvalidOperationException("Invalid operation"));
+```
+
+
+---
+
+### Other Methods
+
+- `C1Log.Flush()`  
+  Ensures all queued log messages are written and all sinks are disposed.  
+  **Call this before application exit.**
+
+---
+
+### Events
+
+- `C1Log.OnLoggingFailure`  
+  Event triggered when a logging failure occurs (e.g., file write error or sink failure).
+
+**Example:**
+```csharp
+C1Log.OnLoggingFailure += ex => Console.Error.WriteLine($"Logging failed: {ex}");
+```
+
+
+---
+
+## Properties
+
+- `C1Log.MaxLogFiles` — Maximum number of log files to keep.
+- `C1Log.LogDirectory` — Directory where log files are written.
+- `C1Log.MaxFileSizeBytes` — Maximum log file size before rolling.
+- `C1Log.MinLogLevel` — Minimum log level to write.
+- `C1Log.OutputMode` — Log output mode: Console, File, or Both.
+- `C1Log.Formatter` — Log message formatter delegate.
+
+---
+
+## Enums
+
+### `LogLevel`
+- `Emergency` — System is unusable.
+- `Alert` — Immediate action required.
+- `Critical` — Critical conditions.
+- `Error` — Error conditions.
+- `Warning` — Warning conditions.
+- `Notice` — Normal but significant condition.
+- `Informational` — Informational messages.
+- `Debug` — Debug-level messages.
+
+### `LogOutputMode`
+- `Console`
+- `File`
+- `Both`
+
+---
+
+## Interfaces
+
+### `ILogSink`
+
+Implement this interface to create a custom log sink (e.g., for cloud, database, or other destinations):
+
+```csharp
+public interface ILogSink : IDisposable { C1Log.LogLevel MinLogLevel { get; } Task WriteAsync(string message, C1Log.LogLevel level, IDictionary<string, object> context = null); }
+```
+
+
+**Register your sink:**
+```csharp
+C1Log.AddSink(new MyCustomSink());
+```
+
+---
+
+## Usage Example
+```csharp
+C1Log.InitLog(); 
+C1Log.Informational("App started."); 
+C1Log.Flush();
+```
+
+
+---
+
+**Tip:**  
+For advanced scenarios, use `C1LogConfig` to configure sinks, formatting, and log file management in one place.
