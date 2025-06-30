@@ -2,6 +2,13 @@
 title: Custom Sinks (Filters)
 icon: "filter"
 ---
+## Filtering for Specific Log Levels in a Custom Sink
+
+<Info>By default, a custom sink in C1Logger uses the MinLogLevel property to determine which log messages it receives. However, this property only allows you to filter for all log levels at or above a certain severity (e.g., all logs that are Critical or less severe).</Info>
+
+If you want your sink to process only specific log levels (for example, only Informational and Critical), you can implement the filtering logic inside your sink's WriteAsync method. This gives you full control over which messages are handled.
+
+<Tip>You can also use this to filter for every log below or above a log level.</Tip>
 
 C1Logger supports extensibility through custom log sinks.  
 A log sink allows you to send log messages to any destination (e.g., console, file, database, cloud logging, etc.).

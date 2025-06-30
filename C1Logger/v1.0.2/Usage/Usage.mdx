@@ -5,7 +5,7 @@ icon: "terminal"
 
 ## Auto-Initialization
 
-**C1Logger no longer requires manual initialization!** The logger automatically initializes when you make your first log call. Simply set any configuration properties before logging:
+<Check>**C1Logger no longer requires manual initialization!** The logger automatically initializes when you make your first log call. Simply set any configuration properties before logging:</Check>
 
 ```csharp
 using C1Logger;
@@ -19,7 +19,7 @@ C1Log.Flush();
 
 ## Manual Initialization (Legacy - Deprecated)
 
-The `InitLog` methods are now **deprecated** but still supported for backward compatibility. These may be removed in a future version:
+<Warning>The `InitLog` methods are now **deprecated** but still supported for backward compatibility. These may be removed in a future version:</Warning>
 
 ```csharp
 C1Log.InitLog(); // Default settings 
@@ -44,7 +44,7 @@ C1Log.Flush(); // Ensure all logs are written
 
 ## Configuration Before Logging
 
-You can customize the log directory, minimum log level, and formatter **before making your first log call**:
+<Info>You can customize the log directory, minimum log level, and formatter **before making your first log call**:</Info>
 
 ```csharp
 using C1Logger;

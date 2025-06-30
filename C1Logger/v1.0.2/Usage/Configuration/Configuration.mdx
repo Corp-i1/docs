@@ -5,7 +5,7 @@ icon: "Gear"
 
 ## Auto-Configuration
 
-C1Logger auto-initializes when you make your first log call. Simply set properties before logging:
+<Check>C1Logger auto-initializes when you make your first log call. Simply set properties before logging:</Check>
 
 ```csharp
 using C1Logger;
@@ -24,7 +24,7 @@ C1Log.Informational("Application started.");
 
 ## Legacy Configuration with `C1LogConfig` (Deprecated)
 
-The `C1LogConfig` class and `InitLog` methods are deprecated but still supported:
+<Warning>The `C1LogConfig` class and `InitLog` methods are deprecated but still supported:</Warning>
 
 ```csharp
 var config = new C1LogConfig { 
@@ -63,5 +63,4 @@ var config = new C1LogConfig {
 
 ---
 
-**Tip:**  
-You can combine all configuration options for advanced scenarios, such as custom formatting, log file management, and multi-destination logging.
+<Tip>You can combine all configuration options for advanced scenarios, such as custom formatting, log file management, and multi-destination logging.</Tip>

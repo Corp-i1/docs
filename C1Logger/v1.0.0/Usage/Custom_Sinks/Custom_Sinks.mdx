@@ -36,7 +36,7 @@ public class MyCustomSink : C1Log.ILogSink {
 
 ## Registering Your Sink
 
-Add your sink before making your first log call:
+Add your sink before logging:
 
 ```csharp
 C1Log.AddSink(new MyCustomSink());
@@ -47,7 +47,7 @@ C1Log.AddSink(new MyCustomSink());
 
 ```csharp
 C1Log.AddSink(new MyCustomSink()); 
-// Logger auto-initializes on first log call
+C1Log.InitLog(); 
 C1Log.Informational("This message will be sent to your custom sink."); 
 C1Log.Flush();
 ```
@@ -132,7 +132,7 @@ public class ConsoleSink : C1Log.ILogSink {
 // Register both sinks 
 C1Log.AddSink(new ConsoleSink()); 
 C1Log.AddSink(new FileSink());
-// Logger auto-initializes on first log call
+C1Log.InitLog(); 
 C1Log.Informational("This will go to the console sink."); 
 C1Log.Warning("This will go to both the console and file sinks."); 
 C1Log.Flush();

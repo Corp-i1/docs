@@ -6,29 +6,7 @@ A breif overview of how to use the package for a more indepth look go to restros
 
 ## Static Methods
 
-### Configuration Properties (Recommended)
-
-Set these properties before making your first log call to configure the logger:
-
-| Property | Type | Description | Default |
-|----------|------|-------------|---------|
-| `LogDirectory` | `string` | Directory where log files are written | `{AppDirectory}\Logs` |
-| `MaxLogFiles` | `int` | Maximum number of log files to keep | `10` |
-| `MinLogLevel` | `LogLevel` | Minimum log level to write | `Informational` |
-| `MaxFileSizeBytes` | `long` | Maximum log file size before rolling | `10 MB` |
-| `OutputMode` | `LogOutputMode` | Console, File, or Both | `Both` |
-| `Formatter` | `Func<DateTime, LogLevel, string, string>` | Custom message formatter | Default format |
-
-**Example:**
-```csharp
-C1Log.LogDirectory = @"C:\Logs";
-C1Log.MinLogLevel = C1Log.LogLevel.Warning;
-C1Log.Informational("Auto-initializes here"); // Logger starts automatically
-```
-
-### `InitLog` Overloads (Deprecated)
-
-⚠️ **These methods are deprecated and will be removed in a future version. Use property configuration instead.**
+### `InitLog` Overloads
 
 | Signature                                                      | Description                                         |
 |--------------------------------------------------------------- |-----------------------------------------------------|
@@ -41,9 +19,9 @@ C1Log.Informational("Auto-initializes here"); // Logger starts automatically
 | `InitLog(int maxLogFiles, string logDirectory, LogLevel minLogLevel)` | Sets max files, directory, and log level.           |
 | `InitLog(C1LogConfig config)`                                  | Full configuration using a config object.           |
 
-**Legacy Example:**
+**Example:**
 ```csharp
-C1Log.InitLog(@"C:\Logs", C1Log.LogLevel.Warning); // Deprecated
+C1Log.InitLog(@"C:\Logs", C1Log.LogLevel.Warning);
 ```
 
 

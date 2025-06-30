@@ -34,8 +34,8 @@ var shorthand = C1Log.LogLevel.Critical.ShortHand(); // "crit"
 
 ## Log Level Filtering
 
-You can control which log messages are written by setting `C1Log.MinLogLevel`.  
-Only messages at or above this level will be processed by the logger and its outputs.
+<Info>You can control which log messages are written by setting `C1Log.MinLogLevel`.  
+Only messages at or above this level will be processed by the logger and its outputs.</Info>
 
 ```csharp
 C1Log.MinLogLevel = C1Log.LogLevel.Warning; // Only Warning, Error, Critical, Alert, Emergency will be logged
@@ -43,9 +43,9 @@ C1Log.MinLogLevel = C1Log.LogLevel.Warning; // Only Warning, Error, Critical, Al
 
 ## Custom Sink Filtering
 
-Custom sinks can further filter or process specific log levels.  
-See the [Custom Sinks](custom-sinks) section for more details.
+<Note>Custom sinks can further filter or process specific log levels.  
+See the [Custom Sinks](custom-sinks) section for more details.</Note>
 
 ---
 
-Use the extension method `.ShortHand()` to get the shorthand for any log level.
+<Tip>Use the extension method `.ShortHand()` to get the shorthand for any log level.</Tip>

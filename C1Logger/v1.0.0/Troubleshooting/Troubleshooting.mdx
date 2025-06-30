@@ -3,16 +3,15 @@ title: Troubleshooting
 icon: "wrench"
 ---
 
-- **No logs are written:**  
-  The logger auto-initializes on the first log call. Ensure you call `C1Log.Flush()` before application exit to ensure all logs are written. If using custom configuration, set properties before the first log call.
+<Danger>**No logs are written:**  
+Ensure you called `C1Log.InitLog()` before logging and `C1Log.Flush()` before application exit.</Danger>
 
-- **Logging failures:**  
-  Subscribe to `C1Log.OnLoggingFailure` to handle exceptions during logging. Dont worry even if you dont logs will still be writen to Console.
+<Info>**Logging failures:**  
+Subscribe to `C1Log.OnLoggingFailure` to handle exceptions during logging. Don't worry even if you don't, logs will still be written to Console.</Info>
 
 ```csharp
 C1Log.OnLoggingFailure += ex => Console.Error.WriteLine($"Logging failed: {ex}");
 ```
 
-
-- **Log files not rolling:**  
-  Check `MaxFileSizeBytes` and `MaxLogFiles` settings.
+<Note>**Log files not rolling:**  
+Check `MaxFileSizeBytes` and `MaxLogFiles` settings.</Note>
