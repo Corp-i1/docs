@@ -25,6 +25,17 @@
         ]
       },
       {
+        "tab": "License",
+        "groups": [
+          {
+            "group": "License Information",
+            "pages": [
+              "License"
+            ]
+          }
+        ]
+      },
+      {
         "tab": "Win-Labs",
         "groups": [
           {
