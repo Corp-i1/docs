@@ -22,7 +22,7 @@ jobs:
           
       - name: Sync Win-Labs Docs
         run: |
-          git clone https://github.com/Corp-i1/Win-Labs.git temp-winlabs
+          git clone https://${{ secrets.WINLABS_PAT }}@github.com/Corp-i1/Win-Labs.git temp-winlabs
           
       - name: Sync docs folder
         run: |
