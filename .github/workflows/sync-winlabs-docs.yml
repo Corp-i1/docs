@@ -1,0 +1,54 @@
+name: Sync Win-Labs Docs
+
+on:
+  # Run daily at midnight UTC
+  schedule:
+    - cron: '0 0 * * *'
+  # Allow manual triggering from Actions tab
+  workflow_dispatch:
+  # Optional: trigger when Win-Labs repo has updates
+  repository_dispatch:
+    types: [docs-updated]
+
+jobs:
+  sync-docs:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout docs repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Sync Win-Labs Docs
+        run: |
+          git clone https://github.com/Corp-i1/Win-Labs.git temp-winlabs
+          
+      - name: Sync docs folder
+        run: |
+          # Remove old Win-Labs docs if they exist
+          rm -rf Win-Labs
+          
+          # Copy only the docs folder from Win-Labs repo
+          cp -r temp-winlabs/docs Win-Labs
+          
+          # Clean up temporary clone
+          rm -rf temp-winlabs
+          
+      - name: Check for changes
+        id: check_changes
+        run: |
+          git add Win-Labs
+          if git diff --staged --quiet; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          fi
+          
+      - name: Commit and push changes
+        if: steps.check_changes.outputs.has_changes == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "docs: sync Win-Labs documentation"
+          git push
